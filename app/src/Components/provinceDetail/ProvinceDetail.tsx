@@ -4,7 +4,7 @@ import { getData } from '../../utils/parseData';
 import { months } from '../../utils/types';
 import ProvinceChart from './ProvinceChart';
 
-const ProvinceDetail = ({ provinces, month, year, handleDataClick }) => {
+const ProvinceDetail = ({ provinces, month, year }) => {
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
