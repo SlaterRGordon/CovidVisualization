@@ -5,7 +5,6 @@ import { marks } from "../utils/types";
 
 const Slider = ({ handleSliderChange }) => {
 
-
     function valuetext(value: number) {
         return `${marks[value]}`;
     }

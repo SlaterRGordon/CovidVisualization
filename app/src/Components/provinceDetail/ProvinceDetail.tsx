@@ -1,40 +1,39 @@
 import { useEffect, useState } from "react";
+import { Typography } from '@mui/material';
 import { getData } from '../../utils/parseData';
 import { months } from '../../utils/types';
 import ProvinceChart from './ProvinceChart';
-import Slider from "../Slider";
 
-const ProvinceDetail = ({ province }) => {
+const ProvinceDetail = ({ provinces, month, year, handleDataClick }) => {
     const [data, setData] = useState<any[]>([]);
-    const [month, setMonth] = useState(1);
-    const [year, setYear] = useState(2020);
-
-    const handleSliderChange = (event: Event, newValue: number) => {
-        const newMonth = (newValue % 12) + 1;
-        const newYear = 2020 + Math.floor(newValue / 12);
-
-        setMonth(newMonth);
-        setYear(newYear);
-    };
 
     useEffect(() => {
         let isCancelled = false;
         const fetchData = async () => {
-            getData(province, month, year).then(response => {
+            getData(provinces, month, year).then(response => {
                 if (!isCancelled) {
                     var newData = [];
-                    response.slice(0, 12).forEach(element => {
-                        console.log(element);
-                        var dataPoint = {
-                            "name": months[element.Month].slice(0,3),
-                            "mc": parseInt(element.MonthlyCases),
-                            "md": parseInt(element.MonthlyDeaths),
-                            "mh": parseInt(element.MonthlyHospitalized),
-                            "mi": parseInt(element.MonthlyICU),
-                        };
-
-                        newData.push(dataPoint);
+                    response.forEach((dataArray, index) => {
+                        dataArray.forEach((element, i) => {
+                            if (newData[i]) {
+                                newData[i]["name"] = months[element.Month].slice(0,3);
+                                newData[i][`mc${index}`] = parseInt(element.MonthlyCases);
+                                newData[i][`md${index}`] = parseInt(element.MonthlyDeaths);
+                                newData[i][`mh${index}`] = parseInt(element.MonthlyHospitalized);
+                                newData[i][`mi${index}`] = parseInt(element.MonthlyICU);
+                            } else {
+                                var dataPoint = {};
+                                dataPoint["name"] = months[element.Month].slice(0,3);
+                                dataPoint[`mc${index}`] = parseInt(element.MonthlyCases);
+                                dataPoint[`md${index}`] = parseInt(element.MonthlyDeaths);
+                                dataPoint[`mh${index}`] = parseInt(element.MonthlyHospitalized);
+                                dataPoint[`mi${index}`] = parseInt(element.MonthlyICU);
+        
+                                newData.push(dataPoint);
+                            }
+                        })
                     });
+
                     setData(newData);
                 }
             })
@@ -45,19 +44,32 @@ const ProvinceDetail = ({ province }) => {
         return () => {
             isCancelled = true;
         };
-    }, [province, month, year])
+    }, [provinces, month, year])
 
     return (
-        <div className="w-8/12 bg-gray-200 p-8 rounded-lg">
-            <div className="flex w-full justify-center my-8">
-                <Slider handleSliderChange={handleSliderChange} />
-            </div>
+        <div className="flex flex-grow">
             {data.length > 0 &&
-                <div className='w-full'>
-                    <ProvinceChart data={data} dataKey="mc" color="#0088FE" domain={[0, 60000]} />
-                    <ProvinceChart data={data} dataKey="md" color="#00C49F" domain={[0, 600]}/>
-                    <ProvinceChart data={data} dataKey="mh" color="#FFBB28" domain={[-600, 600]}/>
-                    <ProvinceChart data={data} dataKey="mi" color="#FF8042" domain={[-80, 80]}/>
+                <div className='flex flex-col flex-grow'>
+                    <div className='flex flex-grow'>
+                        <div className="flex flex-col w-full justify-center items-center p-4">
+                            <Typography fontSize={16} fontWeight={500}>Monthly Cases</Typography>
+                            <ProvinceChart name="Monthly Cases" data={data} dataKey="mc" selected={provinces} domain={[0, 60000]} />
+                        </div>
+                        <div className="flex flex-col w-full justify-center items-center p-4">
+                            <Typography fontSize={16} fontWeight={500}>Monthly Deaths</Typography>
+                            <ProvinceChart name="Monthly Deaths" data={data} dataKey="md" selected={provinces} domain={[0, 600]} />
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <div className="flex flex-col w-full justify-center items-center p-4">
+                            <Typography fontSize={16} fontWeight={500}>Monthly Hospitalized</Typography>
+                            <ProvinceChart name="Monthly Hospitalized" data={data} dataKey="mh" selected={provinces} domain={[-600, 600]}/>
+                        </div>
+                        <div className="flex flex-col w-full justify-center items-center p-4">
+                            <Typography fontSize={16} fontWeight={500}>Monthly ICU</Typography>
+                            <ProvinceChart name="Monthly ICU" data={data} dataKey="mi" selected={provinces} domain={[-80, 80]}/>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
