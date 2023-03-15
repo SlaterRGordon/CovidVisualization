@@ -35,8 +35,6 @@ const ProvinceDetail = ({ province }) => {
 
                         newData.push(dataPoint);
                     });
-
-                    console.log(newData);
                     setData(newData);
                 }
             })
