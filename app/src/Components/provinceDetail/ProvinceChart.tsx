@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ProvinceChart = ({ name, data, dataKey, selected, domain }) => {
+const ProvinceChart = ({ data, dataKey, selected, domain }) => {
 
     return (
         <ResponsiveContainer width="100%" height={200}>
@@ -16,7 +16,7 @@ const ProvinceChart = ({ name, data, dataKey, selected, domain }) => {
                 <Tooltip />
                 <Legend />
                 {selected.map((selectOption, index) => {
-                    return <Line key={index} type="monotone" name={`${selectOption.value} ${name}`} dataKey={`${dataKey}${index}`} stroke={selectOption.color} strokeWidth={3} isAnimationActive={false} />;
+                    return <Line key={index} type="monotone" name={`${selectOption.label}`} dataKey={`${dataKey}${index}`} stroke={selectOption.color} strokeWidth={3} isAnimationActive={false} />;
                 })}
             </LineChart>
         </ResponsiveContainer>

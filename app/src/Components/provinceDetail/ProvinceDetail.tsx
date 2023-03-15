@@ -53,21 +53,21 @@ const ProvinceDetail = ({ provinces, month, year }) => {
                     <div className='flex flex-grow'>
                         <div className="flex flex-col w-full justify-center items-center p-4">
                             <Typography fontSize={16} fontWeight={500}>Monthly Cases</Typography>
-                            <ProvinceChart name="Monthly Cases" data={data} dataKey="mc" selected={provinces} domain={[0, 60000]} />
+                            <ProvinceChart data={data} dataKey="mc" selected={provinces} domain={[0, 60000]} />
                         </div>
                         <div className="flex flex-col w-full justify-center items-center p-4">
                             <Typography fontSize={16} fontWeight={500}>Monthly Deaths</Typography>
-                            <ProvinceChart name="Monthly Deaths" data={data} dataKey="md" selected={provinces} domain={[0, 600]} />
+                            <ProvinceChart data={data} dataKey="md" selected={provinces} domain={[0, 600]} />
                         </div>
                     </div>
                     <div className='flex'>
                         <div className="flex flex-col w-full justify-center items-center p-4">
                             <Typography fontSize={16} fontWeight={500}>Monthly Hospitalized</Typography>
-                            <ProvinceChart name="Monthly Hospitalized" data={data} dataKey="mh" selected={provinces} domain={[-600, 600]}/>
+                            <ProvinceChart data={data} dataKey="mh" selected={provinces} domain={[-600, 600]}/>
                         </div>
                         <div className="flex flex-col w-full justify-center items-center p-4">
                             <Typography fontSize={16} fontWeight={500}>Monthly ICU</Typography>
-                            <ProvinceChart name="Monthly ICU" data={data} dataKey="mi" selected={provinces} domain={[-80, 80]}/>
+                            <ProvinceChart data={data} dataKey="mi" selected={provinces} domain={[-80, 80]}/>
                         </div>
                     </div>
                 </div>
