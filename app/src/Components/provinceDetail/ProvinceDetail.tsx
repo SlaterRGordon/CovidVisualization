@@ -48,7 +48,7 @@ const ProvinceDetail = ({ province }) => {
     }, [province, month, year])
 
     return (
-        <div className="w-8/12">
+        <div className="w-8/12 bg-gray-200 p-8 rounded-lg">
             <div className="flex w-full justify-center my-8">
                 <Slider handleSliderChange={handleSliderChange} />
             </div>
