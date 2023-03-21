@@ -7,26 +7,16 @@ export interface SelectOption {
     readonly value: string;
     readonly label: string;
     readonly color: string;
-  }
+}
 
 const selectOptions = [
-    { value: 'BC', label: 'British Columbia', color: '#0052CC' },
-    { value: 'AB', label: 'Alberta', color: '#5243AA' },
-    { value: 'MB', label: 'Manitoba', color: '#5243AA' },
-    { value: 'NB', label: 'New Brunswick', color: '#FF8B00' },
-    { value: 'NL', label: 'Newfoundland', color: '#FFC400' },
-    { value: 'NS', label: 'Nova Scotia', color: '#36B37E' },
-    { value: 'NT', label: 'Northwest Territories', color: '#8250C4' },
-    { value: 'NU', label: 'Nunavut', color: '#73B761' },
-    { value: 'ON', label: 'Ontario', color: '#00B8D9' },
-    { value: 'PE', label: 'PEI', color: '#0EB194' },
-    { value: 'QC', label: 'Quebec', color: '#FF5630' },
-    { value: 'SK', label: 'Saskatchewan', color: '#666666' },
-    { value: 'NB', label: 'New Brunswick', color: '#FF8B00' },
-    { value: 'YT', label: 'Yukon', color: '#ECC846' },
+    { value: 'MonthlyCases', label: 'Cases', color: '#5243AA' },
+    { value: 'MonthlyDeaths', label: 'Deaths', color: '#FF5630' },
+    { value: 'MonthlyHospitalized', label: 'Hospitalizations', color: '#FF8B00' },
+    { value: 'MonthlyICU', label: 'ICU', color: '#36B37E' },
 ]
 
-const Select = ({ selected, handleSelectChange }) => {
+const FeatureSelect = ({ selected, handleSelectChange }) => {
     const animatedComponents = makeAnimated();
     const colourStyles: StylesConfig<SelectOption, true> = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -84,10 +74,7 @@ const Select = ({ selected, handleSelectChange }) => {
     return (
         <Box sx={{ width: "80%" }}>
             <ReactSelect
-                components={animatedComponents}
-                closeMenuOnSelect={false}
-                defaultValue={selected[0]}
-                isMulti
+                defaultValue={selected}
                 options={selectOptions}
                 styles={colourStyles}
                 onChange={handleSelectChange}
@@ -96,4 +83,4 @@ const Select = ({ selected, handleSelectChange }) => {
     );
 }
 
-export default Select;
+export default FeatureSelect;
