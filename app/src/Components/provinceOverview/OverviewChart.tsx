@@ -1,8 +1,21 @@
 import { useEffect } from 'react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Brush, Bar, BarChart } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Brush, Bar, BarChart, ReferenceArea } from 'recharts';
+import { provOptions } from '../../utils/types';
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="p-4 bg-gray-300">
+        <p className="label">{`${provOptions[label].label} : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const OverviewChart = ({ data, color, handleBarClick }) => {
-
+    console.log(data);
     return (
         <ResponsiveContainer width="100%" height={300}>
             <BarChart
@@ -19,8 +32,9 @@ const OverviewChart = ({ data, color, handleBarClick }) => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
-                <ReferenceLine y={0} stroke="#000" />
+                <Tooltip 
+                    content={<CustomTooltip />}
+                  />
                 <Bar dataKey="mc" fill={color} onClick={handleBarClick} />
             </BarChart>
         </ResponsiveContainer>

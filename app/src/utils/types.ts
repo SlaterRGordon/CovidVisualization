@@ -1,3 +1,19 @@
+export const provOptions = {
+    'BC': { value: 'BC', label: 'British Columbia', color: '#0052CC' },
+    'AB': { value: 'AB', label: 'Alberta', color: '#5243AA' },
+    'MB': { value: 'MB', label: 'Manitoba', color: '#5243AA' },
+    'NB': { value: 'NB', label: 'New Brunswick', color: '#FF8B00' },
+    'NL': { value: 'NL', label: 'Newfoundland', color: '#FFC400' },
+    'NS': { value: 'NS', label: 'Nova Scotia', color: '#36B37E' },
+    'NT': { value: 'NT', label: 'Northwest Territories', color: '#8250C4' },
+    'NU': { value: 'NU', label: 'Nunavut', color: '#73B761' },
+    'ON': { value: 'ON', label: 'Ontario', color: '#FEB5DA' },
+    'PE': { value: 'PE', label: 'PEI', color: '#0EB194' },
+    'QC': { value: 'QC', label: 'Quebec', color: '#536F18' },
+    'SK': { value: 'SK', label: 'Saskatchewan', color: '#5B2071' },
+    'YT': { value: 'YT', label: 'Yukon', color: '#ECC846' },
+  }
+
 export const months = {
     "1": "January",
     "2": "February",
