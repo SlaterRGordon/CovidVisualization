@@ -3,6 +3,7 @@
 This project is a visualization of covid 19 data from January 2020 to January 2022. It allows users to compare monthly cases, deaths, hospitalized and ICU cases across different provinces in canada.
 
 ### Demo
+https://github.com/SlaterRGordon/CovidVisualization/assets/46767334/3b3f1d62-e502-48ec-b287-20a3a640c0d2
 
 ### How to run
 
